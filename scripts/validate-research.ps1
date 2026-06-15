@@ -3,6 +3,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$Root = [System.IO.Path]::GetFullPath($Root)
 
 $required = @(
   "README.md",
@@ -36,11 +37,10 @@ $hits = @()
 foreach ($scanRoot in $scanRoots) {
   $fullRoot = Join-Path $Root $scanRoot
   if (-not (Test-Path -LiteralPath $fullRoot)) { continue }
-  $resolvedRoot = (Resolve-Path -LiteralPath $fullRoot).Path
-  $files = if ((Get-Item -LiteralPath $resolvedRoot).PSIsContainer) {
-    Get-ChildItem -LiteralPath $resolvedRoot -Recurse -File
+  if (Test-Path -LiteralPath $fullRoot -PathType Container) {
+    $files = Get-ChildItem -LiteralPath $fullRoot -Recurse -File
   } else {
-    Get-Item -LiteralPath $resolvedRoot
+    $files = Get-Item -LiteralPath $fullRoot
   }
   foreach ($file in $files) {
     $text = Get-Content -Raw -LiteralPath $file.FullName
