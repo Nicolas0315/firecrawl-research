@@ -1,0 +1,10 @@
+mirrors/
+generated/
+.firecrawl/
+*.log
+*.tmp
+*.bak
+node_modules/
+.env
+.env.*
+!.env.example

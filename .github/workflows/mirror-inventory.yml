@@ -1,0 +1,25 @@
+name: Firecrawl Mirror Inventory
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: List public Firecrawl repositories
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh repo list firecrawl --limit 200 --json name,url,isArchived,updatedAt,primaryLanguage \
+            --jq '.[] | select(.isArchived == false) | [.name,.url,.updatedAt,(.primaryLanguage.name // "")] | @tsv'
