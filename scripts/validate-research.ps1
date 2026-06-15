@@ -36,10 +36,11 @@ $hits = @()
 foreach ($scanRoot in $scanRoots) {
   $fullRoot = Join-Path $Root $scanRoot
   if (-not (Test-Path -LiteralPath $fullRoot)) { continue }
-  $files = if ((Get-Item -LiteralPath $fullRoot).PSIsContainer) {
-    Get-ChildItem -LiteralPath $fullRoot -Recurse -File
+  $resolvedRoot = (Resolve-Path -LiteralPath $fullRoot).Path
+  $files = if ((Get-Item -LiteralPath $resolvedRoot).PSIsContainer) {
+    Get-ChildItem -LiteralPath $resolvedRoot -Recurse -File
   } else {
-    Get-Item -LiteralPath $fullRoot
+    Get-Item -LiteralPath $resolvedRoot
   }
   foreach ($file in $files) {
     $text = Get-Content -Raw -LiteralPath $file.FullName
