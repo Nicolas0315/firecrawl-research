@@ -14,14 +14,15 @@ try {
   }
 
   $patterns = @(
-    '~',
+    'C:\\Users\\ogosh',
+    'C:/Users/ogosh',
     '/Users/s30519',
     '100\.\d+\.\d+\.\d+',
     'sk-[A-Za-z0-9_-]{20,}',
     'ghp_[A-Za-z0-9_]{20,}'
   )
 
-  $files = git ls-files
+  $files = git ls-files | Where-Object { $_ -ne 'scripts/publish-preflight.ps1' }
   foreach ($pattern in $patterns) {
     $hits = $files | ForEach-Object {
       if (Test-Path -LiteralPath $_) {
