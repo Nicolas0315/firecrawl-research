@@ -25,10 +25,10 @@ Source paths reviewed:
 - `searx/engines/brave.py`
 - `docs/dev/search_api.rst`
 
-Katala follow-through:
-- Added local validation for SearXNG `time_range` and `safesearch` environment values in `katala-web-research`.
-- Aligned Katala OpenAlex with SearXNG's public-API behavior: API key optional, `mailto` optional, language filter supported. Added official OpenAlex exact publication-year filtering as `OPENALEX_YEAR`.
-- Aligned Katala GitHub repository results with SearXNG's package-style metadata: language, topics, license, homepage, and clone URL are retained when available.
-- Added Katala `github_code` provider from SearXNG's GitHub code engine shape: text-match metadata is requested, repo/path/fragment metadata is retained, paging is supported, and invalid syntax HTTP 422 returns empty results.
-- Aligned Katala Brave with official API localization, freshness, safesearch, and paging controls while keeping the official API path instead of HTML scraping.
+Follow-through in a separate local web-research tool:
+- Added local validation for SearXNG `time_range` and `safesearch` environment values.
+- Aligned OpenAlex with SearXNG's public-API behavior: API key optional, `mailto` optional, language filter supported. Added official OpenAlex exact publication-year filtering as `OPENALEX_YEAR`.
+- Aligned GitHub repository results with SearXNG's package-style metadata: language, topics, license, homepage, and clone URL are retained when available.
+- Added `github_code` provider from SearXNG's GitHub code engine shape: text-match metadata is requested, repo/path/fragment metadata is retained, paging is supported, and invalid syntax HTTP 422 returns empty results.
+- Aligned Brave with official API localization, freshness, safesearch, and paging controls while keeping the official API path instead of HTML scraping.
 - Preserved HTTP API boundary; no SearXNG source was copied or vendored.

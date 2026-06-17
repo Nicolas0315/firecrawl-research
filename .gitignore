@@ -1,6 +1,7 @@
 mirrors/
 generated/
 .firecrawl/
+.tmp/
 *.log
 *.tmp
 *.bak
