@@ -30,10 +30,13 @@ $core = @(
   "open-scouts"
 )
 
-$gate = "~\work\docs\scripts\agent-clone-gate.py"
+$gate = $env:KATALA_CLONE_GATE
+if (-not $gate) {
+  $gate = Join-Path $env:USERPROFILE "work/docs/scripts/agent-clone-gate.py"
+}
+$useGate = Test-Path -LiteralPath $gate
 if (-not (Get-Command gh -ErrorAction SilentlyContinue)) { throw "gh CLI is required" }
 if (-not (Get-Command git -ErrorAction SilentlyContinue)) { throw "git is required" }
-if (-not (Test-Path -LiteralPath $gate)) { throw "clone gate missing: $gate" }
 
 New-Item -ItemType Directory -Force -Path $MirrorRoot | Out-Null
 
@@ -46,17 +49,21 @@ if ($CoreOnly) {
 foreach ($repo in $repos) {
   $target = Join-Path $MirrorRoot $repo.name
   Write-Host "==> $($repo.name)"
-  $gateOutput = python $gate --url $repo.url --name $repo.name --target $target --search-root (Resolve-Path (Join-Path $PSScriptRoot "..")).Path --min-score 80 --json
-  $gateJson = $gateOutput | ConvertFrom-Json
-  $targetGitExists = Test-Path -LiteralPath (Join-Path $target ".git")
-  if ($gateJson.decision -eq "REVIEW_LOCAL_CANDIDATES_BEFORE_CLONE") {
-    $candidatePaths = @($gateJson.candidates | ForEach-Object { $_.path })
-    $onlyTargetCandidate = $targetGitExists -and $candidatePaths.Count -gt 0 -and (@($candidatePaths | Where-Object { $_ -ne $target }).Count -eq 0)
-    if (-not $onlyTargetCandidate) {
-      Write-Warning "Skipping $($repo.name): local candidates require review"
-      continue
+  if ($useGate) {
+    $gateOutput = python $gate --url $repo.url --name $repo.name --target $target --search-root (Resolve-Path (Join-Path $PSScriptRoot "..")).Path --min-score 80 --json
+    $gateJson = $gateOutput | ConvertFrom-Json
+    $targetGitExists = Test-Path -LiteralPath (Join-Path $target ".git")
+    if ($gateJson.decision -eq "REVIEW_LOCAL_CANDIDATES_BEFORE_CLONE") {
+      $candidatePaths = @($gateJson.candidates | ForEach-Object { $_.path })
+      $onlyTargetCandidate = $targetGitExists -and $candidatePaths.Count -gt 0 -and (@($candidatePaths | Where-Object { $_ -ne $target }).Count -eq 0)
+      if (-not $onlyTargetCandidate) {
+        Write-Warning "Skipping $($repo.name): local candidates require review"
+        continue
+      }
     }
   }
+
+  $targetGitExists = Test-Path -LiteralPath (Join-Path $target ".git")
 
   if ($DryRun) {
     Write-Host "dry-run target: $target"

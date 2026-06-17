@@ -1,6 +1,6 @@
 # Firecrawl Research Repo Instructions
 
-Global baseline: follow `~\AGENTS.md`.
+Global baseline: follow `~/AGENTS.md` when present on the operator machine.
 
 Repo-specific rules:
 - Scope is public-source research, architecture recovery, reproducibility notes, and defensive review.
@@ -8,7 +8,7 @@ Repo-specific rules:
 - Keep cloned upstream repositories under `mirrors/github-firecrawl/`; keep analysis under `docs/`.
 - Do not commit generated clone contents unless explicitly asked. Treat `mirrors/` as disposable local evidence.
 - Record command evidence with date, source path, commit SHA, and verification command.
-- Use shallow clones by default. Run `~\work\docs\scripts\agent-clone-gate.py` before any new external clone or fetch.
+- Use shallow clones by default. When a local clone gate exists, run `~/work/docs/scripts/agent-clone-gate.py` before any new external clone or fetch.
 - Secrets must be referenced only by 1Password item names or environment variable names, never by value.
 
 Validation:

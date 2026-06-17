@@ -14,10 +14,10 @@ Core repositories identified:
 - `firecrawl/pdf-inspector`, `firecrawl/html-extractor`, `firecrawl/html-to-markdown`: extraction/parser libraries relevant to document and HTML processing.
 - `firecrawl/firecrawl-py`, `firecrawl/firecrawl-go`, `firecrawl/firecrawl-java-sdk`, `firecrawl/firecrawl-php`, plus SDKs inside the monorepo.
 
-Initial local clones:
-- `~\work\vendor\firecrawl`: commit checked with `git rev-parse HEAD` after clone.
-- `~\work\vendor\firecrawl-cli`: shallow clone from `https://github.com/firecrawl/cli`.
-- `~\work\vendor\firecrawl-codex-plugin`: commit `419c37b0088dc7c31829e9fd09b563c72b8f5bf4`.
+Initial local clones (optional vendor mirrors outside this repo):
+- `~/work/vendor/firecrawl`: commit checked with `git rev-parse HEAD` after clone.
+- `~/work/vendor/firecrawl-cli`: shallow clone from `https://github.com/firecrawl/cli`.
+- `~/work/vendor/firecrawl-codex-plugin`: commit `419c37b0088dc7c31829e9fd09b563c72b8f5bf4`.
 
 Next inventory step:
 - Run `scripts/sync-firecrawl-org.ps1 -CoreOnly` to mirror the core set under `mirrors/github-firecrawl`.

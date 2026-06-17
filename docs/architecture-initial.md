@@ -1,7 +1,7 @@
 # Firecrawl Initial Architecture RE
 
 date: 2026-06-15
-source: `~\work\vendor\firecrawl`
+source: `mirrors/github-firecrawl/firecrawl` (or a local `~/work/vendor/firecrawl` mirror)
 
 High-level shape:
 - Main repo is a monorepo.

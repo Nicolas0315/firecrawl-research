@@ -12,10 +12,12 @@ This repo is not for:
 - storing API keys, tokens, cookies, or local CLI credential files
 - copying private SaaS state or probing production systems
 
-Current local source mirrors:
-- `~\work\vendor\firecrawl`
-- `~\work\vendor\firecrawl-cli`
-- `~\work\vendor\firecrawl-codex-plugin`
+Optional local vendor mirrors (outside this repo):
+- `~/work/vendor/firecrawl`
+- `~/work/vendor/firecrawl-cli`
+- `~/work/vendor/firecrawl-codex-plugin`
+
+Canonical mirror target inside this repo: `mirrors/github-firecrawl/`
 
 Quick commands:
 

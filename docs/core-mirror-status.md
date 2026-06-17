@@ -2,7 +2,7 @@
 
 date: 2026-06-15
 command: `pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/sync-firecrawl-org.ps1 -CoreOnly`
-mirror root: `~\work\firecrawl-research\mirrors\github-firecrawl`
+mirror root: `mirrors/github-firecrawl`
 
 Result:
 - `cli`: `48a341a`

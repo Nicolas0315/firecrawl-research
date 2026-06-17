@@ -2,7 +2,7 @@
 
 date: 2026-06-15
 command: `pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/sync-firecrawl-org.ps1`
-mirror root: `~\work\firecrawl-research\mirrors\github-firecrawl`
+mirror root: `mirrors/github-firecrawl`
 
 Result:
 - Firecrawl GitHub org non-archived public repo count from `gh repo list firecrawl --limit 200 --json name,isArchived`: `98`
