@@ -32,3 +32,7 @@ Initial RE notes:
 - [docs/repo-inventory.md](docs/repo-inventory.md)
 - [docs/core-mirror-status.md](docs/core-mirror-status.md)
 - [docs/full-mirror-status.md](docs/full-mirror-status.md)
+
+- [Automation](.github/workflows/)
+
+- [Repository hygiene](.gitignore)
